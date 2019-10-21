@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.kwatts.android.NetScanner">
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
+	<application android:name=".App" android:label="@string/app_name" android:supportsRtl="true" android:usesCleartextTraffic="true" android:icon="@drawable/antenna_blue_128x128" >
+		<meta-data
+			android:name="com.google.android.geo.API_KEY"
+			android:value="@string/GOOGLE_MAPS_NETSCANNER_API_KEY" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ADMOB_APP_ID"/>
+		<service android:name="PlaybackService" android:enabled="true"/>
+		<uses-library android:name="com.google.android.maps" />
+		<activity android:name=".WelcomeScreenActivity" android:supportsRtl="true" android:theme="@style/AppTheme" android:label="@string/app_name">
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+		</activity>
+		<activity android:name=".MainActivity" android:launchMode="singleTop" android:supportsRtl="true" android:theme="@style/AppTheme"/>
+		<activity android:name=".SettingsActivity"/>
+
+		<!-- <activity android:name="PlayerActivity" android:theme="@style/CustomDialogTheme"/> -->
+		<activity android:name="PoliceCodeActivity" android:theme="@android:style/Theme.Dialog"
+			android:label="Police Codes"/>
+		<activity android:name="SelectStateActivity" android:theme="@android:style/Theme.Dialog"
+			android:label="Select And Load State"/>
+	</application>
+
+</manifest> 

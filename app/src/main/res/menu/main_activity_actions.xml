@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/action_login"
+        android:title="Login"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_logout"
+        android:title="Logout"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_goto_state"
+        android:title="Go to State"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_police_code"
+        android:title="Police Codes"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_setting"
+        android:title="@string/action_setting"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_about"
+        android:title="About"
+        android:visible="true"
+        app:showAsAction="never" />
+</menu>

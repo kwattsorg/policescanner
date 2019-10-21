@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/welcome_layout_root"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:background="#ffffffff">
+
+	<ImageView
+		android:id="@+id/welcome_netscanner_logo"
+		android:layout_width="100dip"
+		android:layout_height="100dip"
+		android:layout_alignParentTop="true"
+		android:layout_centerInParent="true"
+		android:layout_gravity="center"
+		android:layout_marginTop="14dp" />
+<WebView
+        android:id="@+id/welcome_webview"
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content"
+		android:layout_gravity="center"
+	    android:layout_centerInParent="true"
+        android:layout_below="@+id/welcome_netscanner_logo"
+/>
+<Button android:text="Start!"
+	android:id="@+id/startButton"
+	android:layout_below="@+id/welcome_webview"
+	android:layout_width="match_parent"
+	android:layout_height="100dip"
+	android:layout_centerInParent="true">
+	<!-- android:onClick="startClickHandler" -->
+</Button>
+</RelativeLayout>

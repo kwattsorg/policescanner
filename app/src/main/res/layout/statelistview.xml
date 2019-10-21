@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+<TextView android:id="@+id/header"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+	android:layout_width="240sp"
+	android:layout_height="wrap_content"
+		android:textColor = "#ffffffff"
+		android:text = "Select your default home state"
+		android:textSize="17dip"
+		/>
+<Spinner android:id="@+id/StateSpinner" 
+	android:layout_width="240sp" 
+	android:layout_height="wrap_content"
+	android:layout_below="@+id/header">
+</Spinner>
+<Button android:text="Go" android:id="@+id/GoButton" 
+	android:layout_below="@+id/StateSpinner" 
+	android:onClick="goClickHandler"
+	android:layout_width="120sp" 
+	android:layout_height="wrap_content">
+</Button>
+<Button android:text="Cancel" 
+	android:id="@+id/CancelButton" 
+	android:layout_below="@+id/StateSpinner" 
+	android:layout_width="120sp" 
+	android:layout_height="wrap_content" 
+	android:onClick="cancelClickHandler"
+	android:layout_toRightOf="@+id/GoButton">
+</Button>
+</RelativeLayout>

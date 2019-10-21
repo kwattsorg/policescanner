@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    signingConfigs {
+        release {
+            def keystoreFilename = keystoreProperties['storeFile']
+            storeFile = keystoreFilename == null ? null : rootProject.file(keystoreFilename)
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId "net.kwatts.android.NetScanner"
+        //testApplicationId "net.kwatts.android.NetScanner"
+        //testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+        minSdkVersion 17
+        targetSdkVersion 28 //26
+        multiDexEnabled true
+        versionCode 8
+        versionName "1.8"
+        buildConfigField 'String', "GOOGLE_MAPS_GEOCODE_API_KEY", keystoreProperties['GOOGLE_MAPS_GEOCODE_API_KEY']
+        buildConfigField 'String', "GOOGLE_MAPS_NETSCANNER_API_KEY", keystoreProperties['GOOGLE_MAPS_NETSCANNER_API_KEY']
+        buildConfigField 'String', "BROADCASTIFY_API_KEY", keystoreProperties['BROADCASTIFY_API_KEY']
+        buildConfigField 'String', "ADMOB_APP_ID", keystoreProperties['ADMOB_APP_ID']
+        buildConfigField 'String', "ADMOB_BANNER_APP_ID", keystoreProperties['ADMOB_BANNER_APP_ID']
+
+        resValue "string", "GOOGLE_MAPS_GEOCODE_API_KEY", keystoreProperties['GOOGLE_MAPS_GEOCODE_API_KEY']
+        resValue "string", "GOOGLE_MAPS_NETSCANNER_API_KEY", keystoreProperties['GOOGLE_MAPS_NETSCANNER_API_KEY']
+        resValue "string", "BROADCASTIFY_API_KEY", keystoreProperties['BROADCASTIFY_API_KEY']
+        resValue "string", "ADMOB_APP_ID", keystoreProperties['ADMOB_APP_ID']
+        resValue "string", "ADMOB_BANNER_APP_ID", keystoreProperties['ADMOB_BANNER_APP_ID']
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release// run ./gradlew assembleRelease
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    dependencies {
+        testImplementation 'junit:junit:4.12'
+        // Required for instrumented tests
+        androidTestImplementation 'com.android.support:support-annotations:24.0.0'
+        implementation 'com.jakewharton.timber:timber:4.7.1'
+
+
+        ext.googleSupportVersion = "28.0.0"
+        implementation "com.android.support:appcompat-v7:$googleSupportVersion"
+        implementation "com.android.support:preference-v7:$googleSupportVersion"
+        implementation "com.android.support:support-compat:$googleSupportVersion"
+        implementation "com.android.support:design:$googleSupportVersion"
+        implementation 'com.google.android.gms:play-services-basement:15.0.1'
+        implementation 'com.google.android.gms:play-services-base:15.0.1'
+        implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+        implementation 'com.google.android.gms:play-services-location:15.0.1'
+        implementation 'com.google.android.gms:play-services-ads:17.2.1'
+        implementation name:'maps-sdk-3.0.0-beta', ext:'aar'
+        implementation name:'places-maps-sdk-3.0.0-beta', ext:'aar'
+        implementation 'com.google.maps:google-maps-services:0.9.3'
+        implementation 'org.slf4j:slf4j-simple:1.7.25'
+        implementation 'com.google.firebase:firebase-core:16.0.9'
+        implementation 'com.google.firebase:firebase-firestore:17.1.2'
+        implementation 'com.github.eggheadgames:android-about-box:1.3.2'
+        implementation 'com.mahc.custombottomsheetbehavior:googlemaps-like:0.9.1'
+        def lifecycle_version = "1.1.1"
+        implementation    "android.arch.lifecycle:extensions:$lifecycle_version"
+        implementation 'com.chibde:audiovisualizer:2.1.0'
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+apply plugin: 'com.google.gms.google-services'
