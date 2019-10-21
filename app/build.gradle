@@ -2,10 +2,22 @@ apply plugin: 'com.android.application'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    keystoreProperties.load(new FileInputStream(rootProject.file("debug.keystore.properties")))
+}
 
 android {
     signingConfigs {
+        debug {
+            def keystoreFilename = keystoreProperties['storeFile']
+            storeFile = keystoreFilename == null ? null : rootProject.file(keystoreFilename)
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storePassword keystoreProperties['storePassword']
+        }
         release {
             def keystoreFilename = keystoreProperties['storeFile']
             storeFile = keystoreFilename == null ? null : rootProject.file(keystoreFilename)
@@ -13,6 +25,8 @@ android {
             keyPassword keystoreProperties['keyPassword']
             storePassword keystoreProperties['storePassword']
         }
+
+
     }
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
